@@ -3,6 +3,27 @@ import matplotlib.pyplot as plt # single use of plt is commented out
 import os.path  
 import PIL.ImageDraw            
 
+directory = os.getcwd()
+
+image_list = [] # Initialize aggregaotrs
+file_list = []
+
+directory_list=os.listdir(directory)
+for entry in directory_list:
+        absolute_filename = os.path.join(directory, entry)
+        try:
+            image = PIL.Image.open(absolute_filename)
+            file_list += [entry]
+            image_list += [image]
+        except IOError:
+            pass # do nothing with errors tying to open non-images
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+def crossfade(original_image):#,adding_image
+    PIL.Image.new('RGBA',original_image.size,(0,0,0,0))
+    
+
 def round_corners_one_image(original_image, percent_of_side=.3):
     """ Rounds the corner of a PIL.Image
     
