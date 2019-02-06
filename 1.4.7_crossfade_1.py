@@ -18,11 +18,13 @@ for entry in directory_list:
         except IOError:
             pass # do nothing with errors tying to open non-images
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-def crossfade(original_image):#,adding_image
-    PIL.Image.new('RGBA',original_image.size,(0,0,0,0))
     
+
+def crossfade(original_image,overlay_image):#,adding_image
+    #Image=
+    #overlay_image_actual=
+    PIL.Image.new('RGB')#,original_image.size,(0,0,0))
+    PIL.overlay_image_actual.resize((640,650))
 
 def round_corners_one_image(original_image, percent_of_side=.3):
     """ Rounds the corner of a PIL.Image
