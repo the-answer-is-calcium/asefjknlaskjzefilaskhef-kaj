@@ -1,7 +1,8 @@
 import PIL
 import matplotlib.pyplot as plt # single use of plt is commented out
 import os.path  
-import PIL.ImageDraw            
+import PIL.ImageDraw
+import math            
 
 directory = os.getcwd()
 
@@ -18,13 +19,26 @@ for entry in directory_list:
         except IOError:
             pass # do nothing with errors tying to open non-images
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
 
-def crossfade(original_image,overlay_image):#,adding_image
-    #Image=
-    #overlay_image_actual=
-    PIL.Image.new('RGB')#,original_image.size,(0,0,0))
-    PIL.overlay_image_actual.resize((640,650))
+
+def crossfade(original_image_name,overlay_image_name):#,adding_image
+    #image.blend
+    original_image=PIL.Image.open(original_image_name)
+    overlay_image=PIL.Image.open(overlay_image_name)
+    
+    list_of_pixels_original = list(original_image.getdata())
+    list_of_pixels_overlay = list(overlay_image.getdata())
+    # Do something to the pixels...
+    list_of_pixels_new=[]
+    for n in xrange(639*648):
+        if n%2==0:
+            list_of_pixels_new.append(list_of_pixels_original[n])
+        else:
+            list_of_pixels_new.append(list_of_pixels_overlay[n])
+
+    working_image=PIL.Image.new('RGB',original_image.size,(0,10,0))
+    working_image.putdata(list_of_pixels_new)
+    working_image.save('blended_image.jpg')
 
 def round_corners_one_image(original_image, percent_of_side=.3):
     """ Rounds the corner of a PIL.Image
